@@ -133,3 +133,67 @@ app.patch("/edit/:id", (req, res) =>{
     }
 
 })
+
+
+// DELETE PAGE-: on clicking delete button request will sent here
+app.get("/update/:id/delete", (req, res) => {
+    let {id} = req.params;
+    let q = `SELECT * FROM list WHERE id = '${id}'`;
+    try {
+        connection.query(q, (err, result) => {
+            console.log(result);
+            let del = result[0];
+            console.log(res);
+            res.render("delete.ejs", {del});
+        })
+    } catch (err) {
+        console.log(err);
+    }
+})
+
+
+// Confirming deletion-: on clicking 'Confirm' button in delete page request will sent here
+app.delete("/delete/:code&:id", (req, res)=>{
+    let {id: id, code = code} = req.params;
+    let {txt_pcode} = req.body;
+
+    // console.log(id);
+    // console.log(code);
+
+
+    let q = `SELECT * FROM list 
+             WHERE id = '${id}'`;
+    try {
+        connection.query(q, (err, result) => {
+            if(err) throw err;
+
+            // if deletion Unsuccessful (means user wrote wrong pcode )
+            if(txt_pcode != code){
+                res.render("failedDelete.ejs", {code});     //render to failedDelete.ejs template
+            }
+
+            // if stock deleted successfully (means user wrote right pcode )
+            else{
+
+                // delete that stock from database
+                let q2 = `DELETE FROM list      
+                WHERE id = '${id}'`;
+                try {
+                    connection.query(q2, (err, result) => {
+                        if(err) throw err;
+                        console.log(result);
+                        res.redirect("/home/show");    // after deleting stock redirecting to show page{where all inventory data will shown}
+                })
+                } catch (err) {
+                    console.log(err);
+                    res.send("Database facing Error. Try Again...");
+                }
+            }
+            
+        })
+    } catch (err) {
+        console.log(err);
+        res.send("Database facing Error. Try Again...");
+    }
+
+})

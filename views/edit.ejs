@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDIT PAGE</title>
+</head>
+<body>
+    <h3>Product Code : <%= edit_product.pcode %></h3>
+    <h3>Product Name : <%= edit_product.pname %></h3>
+
+    <!-- sending 'PATCH' request from here using 'method-override' package  -->
+    <form method="post" action="/edit/<%=edit_product.id%>/?_method=PATCH">
+        <h3>Unit: <input type="text" name="unit" placeholder="<%= edit_product.unit %>" value="<%= edit_product.unit %>"></h3>
+        <h3>Price Per Unit: <input type="text" name="ppu" placeholder="<%= edit_product.ppu %>" value="<%= edit_product.ppu %>"></h3>
+        <button>Apply Chanages</button>
+    </form>
+
+</body>
+</html>

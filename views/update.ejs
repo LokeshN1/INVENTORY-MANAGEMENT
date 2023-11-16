@@ -1,0 +1,43 @@
+<!-- EDIT OR DELETE INVENTORY -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Inventory</title>
+</head>
+<body>
+    <!-- <h1>HELLO WELCOME TO UPDATE INVENTORY PAGE</h1> -->
+    <table border="1" >
+        <thead>
+            <tr>
+                <th>Product Code</th>
+                <th>Product name</th>
+                <th>Unit</th>
+                <th>Price per unit</th>
+                <th>Stock Value</th>
+                <th>UPDATE</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            
+                <% for(list of list_data){    %>
+                    <tr>
+                        <td><%= list.pcode %> </td>
+                        <td><%= list.pname %> </td>
+                        <td><%= list.unit %> </td>
+                        <td><%= list.ppu %> </td>
+                        <td><%= list.stock_value %> </td>
+                        <td>
+                            <!-- 'Edit' and 'Delete' Button-->
+                            <form method="GET" action="/update/<%= list.id %>/edit"><button>Edit</button></form>
+                            <form method="GET" action="/update/<%= list.id %>/delete"><button>Delete</button></form>
+                        </td>
+                    </tr>
+                <% } %>
+            
+        </tbody>
+        
+    </table>
+</body>
+</html>

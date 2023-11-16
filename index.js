@@ -48,3 +48,17 @@ app.listen(port, (req, res) =>{     // checking server connection
 app.get("/home",(req, res)=>{
     res.render("home.ejs");
 })
+
+app.get("/home/show", (req, res) =>{
+    let q = `SELECT * FROM list`;
+    try {
+        connection.query(q, (err, list_data) =>{
+            console.log(list_data);
+            // res.
+            res.render("show.ejs", {list_data});
+        })
+    } catch (err) {
+        console.log(err);
+    }
+    // res.send("dfkjs");
+})

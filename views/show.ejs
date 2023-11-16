@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <!-- <style>
+        table{
+            border: 2px solid red;
+        }
+        tr, th, td{
+            border: 2px solid black;
+            padding: 10px;
+            margin: 20px;
+        }
+        th{
+            /* border-right: 2px solid black; */
+            padding: 0 10px;
+        }
+    </style> -->
+</head>
+<body>
+    <table border="1" >
+        <thead>
+            <tr>
+                <th>Product Code</th>
+                <th>Product name</th>
+                <th>Unit</th>
+                <th>Price per unit</th>
+                <th>Stock Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            
+                <% for(list of list_data){    %>
+                    <tr>
+                        <td><%= list.pcode %> </td>
+                        <td><%= list.pname %> </td>
+                        <td><%= list.unit %> </td>
+                        <td><%= list.ppu %> </td>
+                        <td><%= list.stock_value %> </td>
+                    </tr>
+                <% } %>
+            
+        </tbody>
+        
+    </table>
+</body>
+</html>

@@ -7,6 +7,17 @@
 <body>
     <h1>Invalid Code. Failed To delete stock product code: <%= code %>.</h1>
     <!-- Request sending to update page  -->
-    <form action="/home/update"><button>Retry</button></form>       
+    <button onclick="goback()">Retry</button> 
+    <button onclick="gohome()">Home page</button>
 </body>
+
+<!-- JAVA SCRIPT -->
+<script>
+    const goback = () =>{
+        window.history.back();          // it will redirect to previous page
+    }
+    const gohome = () =>{
+        window.location.href = '/home';     // it will redirect to home page
+    }
+</script>
 </html>

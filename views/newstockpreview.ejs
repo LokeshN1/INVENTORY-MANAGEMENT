@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview</title>
+</head>
+<body>
+<!-- showing details of new stock -->
+    <table border="1" >
+        <thead>
+            <tr>
+                <th>Product Code</th>
+                <th>Product name</th>
+                <th>Unit</th>
+                <th>Price per unit</th>
+                <th>Stock Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            
+                    <tr>
+                        <td><%= new_det.pcode %> </td>
+                        <td><%= new_det.pname %> </td>
+                        <td><%= new_det.unit %> </td>
+                        <td><%= new_det.ppu %> </td>
+                        <td><%= new_det.unit*new_det.ppu %> </td>
+                    </tr>
+            
+        </tbody>
+        
+    </table>
+
+
+    <!-- EDIT button -> if client wants to do changes in new stock so render to back page(previous page) -->
+    <button onclick="goback()">Edit</button>    
+
+
+    <!-- Confirm button -> storing new stock in database -->
+    <form method="post" action="/addstock">
+        <!-- we sent 'post' request also an object 'new_det' in form of string with the help of JSON.stringify()  -->
+        <input type="hidden" name="new_det" value='<%= JSON.stringify(new_det) %>'>
+        <button type="submit">Confirm</button>
+    </form>
+
+<body>
+<!-- Java script  -->
+<script>
+    const goback = () =>{
+        window.history.back();          // to go to previous page
+    }
+</script>
+</html>

@@ -197,3 +197,56 @@ app.delete("/delete/:code&:id", (req, res)=>{
     }
 
 })
+
+
+
+// ADD NEW STOCK-: if user click on 'add new stock' button so request will sent here and page will render to newstockform template
+app.get("/home/newstock", (req, res) => {
+    res.render("newstockform.ejs");
+})
+
+
+// Preview-: after filling details of new stock when user click on 'add' button in newstockform template request will sent here and page will render to newstockpreview template
+app.post("/newstockpreview", (req, res) =>{
+    let new_det = req.body;
+    res.render("newstockpreview.ejs", {new_det})
+})
+
+
+//Import the body-parser middleware. -> so i can sent object with request from client side in the form of string using JSON.stringify()
+app.use(express.json());
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+
+// ADD NEW STOCK IN DB-: in newstockpreview template if user click on 'confirm' button request will sent here. 
+// details of newstock were stored in new_det object we sent that object in form of string along with request
+app.post("/addstock", (req, res) => {
+    let new_stk = JSON.parse(req.body.new_det);     // extract that object's details
+    console.log(new_stk);
+    let stock_value = new_stk.unit*new_stk.ppu;
+
+    // storing object's key's value in array 'arr'-:
+    let arr = [uuidv4(), new_stk.pcode, new_stk.pname, new_stk.unit, new_stk.ppu, stock_value];
+    console.log(arr);
+    
+    // Adding new stock in Database-:
+    try {
+        // inserting new stock in database-:
+        let q = `INSERT INTO list                       
+        (id, pcode, pname, unit, ppu, stock_value)
+        VALUES (?, ?, ?, ?, ?, ?)`;
+
+        connection.query(q, arr, (err, result) => {
+            if(err) throw err;
+            console.log(result);
+            res.redirect("/home/show");     // after storing new stock redirecting to show page.
+        })
+    } catch (err) {
+        console.log(err);
+        res.send("Database facing Error. Try Again...");
+
+    }
+})

@@ -6,6 +6,7 @@ app.set("view engine", "ejs");
 const path = require("path");       // to access 'views' folder
 app.set("views", path.join(__dirname, "/views"));
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Requiring 'uuid' package to genrate unique id's -:
 const {v4: uuidv4} = require('uuid');

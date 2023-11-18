@@ -3,15 +3,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Management</title>
+    <link rel="stylesheet" href="/styles/global.css">
 </head>
+
 <body>
-    <h1>WELCOME TO INVENTORY</h1>
-
-    <form method="get" action="/home/show"><button>Visit Inventory</button></form>
-
-    <form method="get" action="/home/update"><button>Update Inventory</button></form>
-
-    <form method="get" action="/home/newstock"><button>Add New Stock</button></form>
+<!-- Applying that ejs template which will reamin common on all templates for example navbar, sidebar -->
+    <%- include("includes/common.ejs") %>
+    
 
 </body>
 </html>

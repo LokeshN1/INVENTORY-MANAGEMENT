@@ -5,16 +5,23 @@
     <title>New Stock</title>
 </head>
 <body>
-    
-    <h1>Fill Details of New Stock </h1>
-    <form method="post" action="/newstockpreview">
-        
-        <h3>Product Code : <input type="text" name="pcode" ></h3>
-        <h3>Product Name : <input type="text" name="pname" ></h3>
-        <h3>Unit : <input type="text" name="unit" id=""></h3>
-        <h3>Price per unit : <input type="text" name="ppu" ></h3>
+    <!-- Applying that ejs template which will reamin common on all templates for example navbar, sidebar -->
+    <%- include("includes/common.ejs") %>
 
-        <button>Add</button>
-    </form>
+    <div class="set-table">
+
+        <h1>Fill Details of New Stock </h1>
+        <form method="post" action="/newstockpreview">
+            
+            <h3>Product Code : <input type="text" name="pcode" ></h3>
+            <h3>Product Name : <input type="text" name="pname" ></h3>
+            <h3>Unit : <input type="text" name="unit" id=""></h3>
+            <h3>Price per unit : <input type="text" name="ppu" ></h3>
+
+            <button>Add</button>
+        </form>
+
+    </div>
+
 </body>
 </html>

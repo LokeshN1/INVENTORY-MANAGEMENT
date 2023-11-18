@@ -1,45 +1,55 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Delete Page</title>
-</head>
-<body>
-    <table border="1" >
+  </head>
+  <body>
+    <!-- Applying that ejs template which will reamin common on all templates for example navbar, sidebar -->
+    <%- include("includes/common.ejs") %>
+    
+    <div class="set-table">
+      <table border="1">
         <thead>
-            <tr>
-                <th>Product Code</th>
-                <th>Product name</th>
-                <th>Unit</th>
-                <th>Price per unit</th>
-                <th>Stock Value</th>
-            </tr>
+          <tr>
+            <th>Product Code</th>
+            <th>Product name</th>
+            <th>Unit</th>
+            <th>Price per unit</th>
+            <th>Stock Value</th>
+          </tr>
         </thead>
 
         <tbody>
-                    <tr>
-                        <td><%= del.pcode %> </td>
-                        <td><%= del.pname %> </td>
-                        <td><%= del.unit %> </td>
-                        <td><%= del.ppu %> </td>
-                        <td><%= del.stock_value %> </td>
-                    </tr>            
+          <tr>
+            <td><%= del.pcode %></td>
+            <td><%= del.pname %></td>
+            <td><%= del.unit %></td>
+            <td><%= del.ppu %></td>
+            <td><%= del.stock_value %></td>
+          </tr>
         </tbody>
-        
-    </table>
-    <h3 style="font-weight: 100;">Are you sure to delete this stock? Write <b>'<%= del.pcode %>'</b> to confirm!</h3>
-    <form method="post" action="/delete/<%= encodeURIComponent(del.pcode) %>&<%= del.id %>?_method=DELETE">
-        <input type="text" name="txt_pcode">
+      </table>
+        <h3 style="font-weight: 100">
+        Are you sure to delete this stock? Write <b>'<%= del.pcode %>'</b> to
+        confirm!
+        </h3>
+        <form
+        method="post"
+        action="/delete/<%= encodeURIComponent(del.pcode) %>&<%= del.id %>?_method=DELETE"
+        >
+        <input type="text" name="txt_pcode" />
         <button>Confirm</button>
-    </form>
-<!-- cancel button it will redirect to previous page -->
-    <button onclick="goback()">Cancel</button>  
-    
-</body>
-<!-- JAVA SCRIPT -->
-<script>
-    const goback = () =>{
-        window.history.back();
-    }
-</script>
+        </form>
+        <!-- cancel button it will redirect to previous page -->
+        <button onclick="goback()">Cancel</button>
+    </div>
+
+  </body>
+  <!-- JAVA SCRIPT -->
+  <script>
+    const goback = () => {
+      window.history.back();
+    };
+  </script>
 </html>

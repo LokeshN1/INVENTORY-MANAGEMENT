@@ -5,44 +5,49 @@
     <title>Preview</title>
 </head>
 <body>
-<!-- showing details of new stock -->
-    <table border="1" >
-        <thead>
-            <tr>
-                <th>Product Code</th>
-                <th>Product name</th>
-                <th>Unit</th>
-                <th>Price per unit</th>
-                <th>Stock Value</th>
-            </tr>
-        </thead>
+<!-- Applying that ejs template which will reamin common on all templates for example navbar, sidebar -->
+    <%- include("includes/common.ejs") %>           
 
-        <tbody>
+    <div class="set-table">
+
+        <table border="1" >
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Product name</th>
+                    <th>Unit</th>
+                    <th>Price per unit</th>
+                    <th>Stock Value</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                
+                        <tr>
+                            <td><%= new_det.pcode %> </td>
+                            <td><%= new_det.pname %> </td>
+                            <td><%= new_det.unit %> </td>
+                            <td><%= new_det.ppu %> </td>
+                            <td><%= new_det.unit*new_det.ppu %> </td>
+                        </tr>
+                
+            </tbody>
             
-                    <tr>
-                        <td><%= new_det.pcode %> </td>
-                        <td><%= new_det.pname %> </td>
-                        <td><%= new_det.unit %> </td>
-                        <td><%= new_det.ppu %> </td>
-                        <td><%= new_det.unit*new_det.ppu %> </td>
-                    </tr>
-            
-        </tbody>
-        
-    </table>
+        </table>
 
 
-    <!-- EDIT button -> if client wants to do changes in new stock so render to back page(previous page) -->
-    <button onclick="goback()">Edit</button>    
+        <!-- EDIT button -> if client wants to do changes in new stock so render to back page(previous page) -->
+        <button onclick="goback()">Edit</button>    
 
 
-    <!-- Confirm button -> storing new stock in database -->
-    <form method="post" action="/addstock">
-        <!-- we sent 'post' request also an object 'new_det' in form of string with the help of JSON.stringify()  -->
-        <input type="hidden" name="new_det" value='<%= JSON.stringify(new_det) %>'>
-        <button type="submit">Confirm</button>
-    </form>
+        <!-- Confirm button -> storing new stock in database -->
+        <form method="post" action="/addstock">
+            <!-- we sent 'post' request also an object 'new_det' in form of string with the help of JSON.stringify()  -->
+            <input type="hidden" name="new_det" value='<%= JSON.stringify(new_det) %>'>
+            <button type="submit">Confirm</button>
+        </form>
 
+    </div>
 <body>
 <!-- Java script  -->
 <script>

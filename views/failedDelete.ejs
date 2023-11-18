@@ -5,10 +5,16 @@
     <title>Delete Message</title>
 </head>
 <body>
-    <h1>Invalid Code. Failed To delete stock product code: <%= code %>.</h1>
-    <!-- Request sending to update page  -->
-    <button onclick="goback()">Retry</button> 
-    <button onclick="gohome()">Home page</button>
+    <!-- Applying that ejs template which will reamin common on all templates for example navbar, sidebar -->
+    <%- include("includes/common.ejs") %>
+    
+    <div class="set-table">
+        <h1>Invalid Code. Failed To delete stock product code: <%= code %>.</h1>
+        <!-- Request sending to update page  -->
+        <button onclick="goback()">Retry</button> 
+        <button onclick="gohome()">Home page</button>
+    </div>
+
 </body>
 
 <!-- JAVA SCRIPT -->

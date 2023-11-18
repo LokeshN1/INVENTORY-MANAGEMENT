@@ -6,38 +6,41 @@
     <title>Update Inventory</title>
 </head>
 <body>
-    <!-- <h1>HELLO WELCOME TO UPDATE INVENTORY PAGE</h1> -->
-    <table border="1" >
-        <thead>
-            <tr>
-                <th>Product Code</th>
-                <th>Product name</th>
-                <th>Unit</th>
-                <th>Price per unit</th>
-                <th>Stock Value</th>
-                <th>UPDATE</th>
-            </tr>
-        </thead>
+    <!-- Applying that ejs template which will reamin common on all templates for example navbar, sidebar -->
+    <%- include("includes/common.ejs") %>
+    <div class="set-table">
+        <table border="1" >
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Product name</th>
+                    <th>Unit</th>
+                    <th>Price per unit</th>
+                    <th>Stock Value</th>
+                    <th>UPDATE</th>
+                </tr>
+            </thead>
 
-        <tbody>
+            <tbody>
+                
+                    <% for(list of list_data){    %>
+                        <tr>
+                            <td><%= list.pcode %> </td>
+                            <td><%= list.pname %> </td>
+                            <td><%= list.unit %> </td>
+                            <td><%= list.ppu %> </td>
+                            <td><%= list.stock_value %> </td>
+                            <td>
+                                <!-- 'Edit' and 'Delete' Button-->
+                                <form method="GET" action="/update/<%= list.id %>/edit"><button>Edit</button></form>
+                                <form method="GET" action="/update/<%= list.id %>/delete"><button>Delete</button></form>
+                            </td>
+                        </tr>
+                    <% } %>
+                
+            </tbody>
             
-                <% for(list of list_data){    %>
-                    <tr>
-                        <td><%= list.pcode %> </td>
-                        <td><%= list.pname %> </td>
-                        <td><%= list.unit %> </td>
-                        <td><%= list.ppu %> </td>
-                        <td><%= list.stock_value %> </td>
-                        <td>
-                            <!-- 'Edit' and 'Delete' Button-->
-                            <form method="GET" action="/update/<%= list.id %>/edit"><button>Edit</button></form>
-                            <form method="GET" action="/update/<%= list.id %>/delete"><button>Delete</button></form>
-                        </td>
-                    </tr>
-                <% } %>
-            
-        </tbody>
-        
-    </table>
+        </table>
+    </div>
 </body>
 </html>

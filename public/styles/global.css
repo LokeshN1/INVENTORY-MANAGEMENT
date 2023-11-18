@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@800&family=EB+Garamond:wght@800&family=Roboto+Condensed:wght@500&family=Source+Serif+4:opsz,wght@8..60,600&display=swap&family=Cinzel:wght@500&family=Ysabeau+SC:wght@300;600&family=Didact+Gothic');
+h1{
+font-family: 'Cinzel';
+}
+
+h3, th{
+    font-family: 'Ysabeau SC', 'serif';
+}
+
+body{
+    background-image: url(https://cdn.sanity.io/images/tlr8oxjg/production/c57419dd851c5bc1d60a8c4d4e52e2f85367fdac-1456x816.png?w=3840&q=80&fit=clip&auto=format)  ;
+    background-size: cover; 
+    position: relative;   
+
+}
+
+
+/* CSS on TABLE */
+.set-table{
+    width: 78vw;
+    display: flex;
+    justify-content: center;
+    margin-left: 20vw;
+    margin-top: 10vh;
+    top: 10vh;
+    position: absolute;
+}
+
+table{
+    width: 80%;
+    margin: center;
+      
+}
+
+th{
+    font-size: 20px;
+    font-weight: 900;
+}
+
+th, td{
+    padding: 2vw;
+    text-align: center;
+
+}
+
+td{
+    color:rgb(255, 255, 255);
+    font-size: 18px;
+    font-family: 'Didact Gothic', serif;
+    font-weight: bolder;
+
+}
+thead{
+    background: rgb(255, 255, 255);
+}
+
+tbody{
+    background: rgba(1, 1, 1, 0.718);
+}
+
+button{
+    cursor: pointer;
+}

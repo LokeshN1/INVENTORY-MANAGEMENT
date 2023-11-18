@@ -17,8 +17,43 @@
             padding: 0 10px;
         }
     </style> -->
+
+    <!-- <style>
+        .set-table{
+            /* min-height: 90vh; */
+            width: 80vw;
+            display: flex;
+            /* align-items: center; */
+            justify-content: center;
+            margin-left: 20vw;
+             margin-top: 10vh;
+              top: 10vh;
+              position: absolute;
+        }
+        table{
+            width: 80%;
+            margin: center;
+              
+        }
+        th{
+            font-size: 20px;
+        }
+        th, td{
+            padding: 2vw;
+            text-align: center;
+        }
+        thead{
+            background: gray;
+        }
+        tbody{
+            /* background: rgb(131, 249, 255)); */
+        }
+    </style> -->
 </head>
 <body>
+    <!-- Applying that ejs template which will reamin common on all templates for example navbar, sidebar -->
+    <%- include("includes/common.ejs") %>
+    <div class="set-table">
     <table border="1" >
         <thead>
             <tr>
@@ -45,5 +80,6 @@
         </tbody>
         
     </table>
+    </div>
 </body>
 </html>

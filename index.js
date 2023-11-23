@@ -313,7 +313,7 @@ app.post("/sell_history/:id", (req, res) => {
             let new_stk_val = new_unit * stk_ppu;       // new stock value
 
 
-    // NOW Updating the stock's data after selling-:
+// NOW Updating the stock's data after selling-:
             q1 = `UPDATE list 
             SET unit = '${new_unit}', stock_value = '${new_stk_val}'
             WHERE id = '${id}'`
@@ -328,9 +328,70 @@ app.post("/sell_history/:id", (req, res) => {
                 res.send("Unable to sell Stock. DATABASE FACING PROBLEMS...");
             }
 
+            console.log(stock);
+
+// Now we will save Sell History -: we will create a list where all selled stock list will be avilable
+
+            let {pcode, pname, unit, ppu, stock_value} = stock[0];
+            console.log(pcode);
+            console.log(ppu);
+
+            let amount = sell_unit*ppu;         // total price of sell_unit
+            
+
+        // Tracking time when you sell stock-:
+            let d = new Date;
+            let dd = d.getDate();
+            let mm = d.toLocaleString('default', { month: 'long' });    // to get month name
+            let yy = d.getFullYear();
+            let h = d.getHours();
+            h = (h < 10) ? `0${h}` : h;
+            let m = d.getMinutes(); 
+            m = (m < 10) ? `0${m}` : m;
+            
+            let date = `${mm} ${dd}, ${yy} ${h}:${m}`;
+            console.log(date);
+    
+        // storing details related to sell stock like porduct name, no. of stock sell, amount, date etc. in array arr
+            let arr = [ uuidv4(), pcode, pname, sell_unit, ppu, amount, date ];
+    
+        // Adding sell history in Database-:    
+            try {
+            // inserting details into new row
+                let q2 = `INSERT INTO sell_history
+                          (id, pcode, pname, sell_unit, ppu, amount, date )
+                          VALUES (?, ?, ?, ?, ?, ?, ?)`
+                          
+                connection.query(q2, arr, (err, result) => {
+                    if(err) throw err;
+                    console.log(result);
+                })
+            } catch (err) {
+                console.log(err);
+                res.send("Unable to sell Stock. DATABASE FACING PROBLEMS...");
+            }
         })
+
     } catch (err) {
         console.log(err);
         res.send("Unable to sell Stock. DATABASE FACING PROBLEMS...")
+    }
+})
+
+
+// 'SELL HISTORY' Button-> In sidebar if user clicks on 'SELL HISTORY' button request will sent here 
+app.get("/home/sell_history", (req, res) =>{
+    let q = "SELECT * FROM sell_history";
+    try {
+        connection.query(q, (err, sell_list) => {
+
+            console.log(sell_list);
+
+            res.render("sell_history.ejs", {sell_list});    // response will sent to template sell_history where user can see stock history
+        })
+    } catch (err) {
+        console.log(err);
+        res.send("Unable to Show Sell History. DATABASE FACING PROBLEMS...")
+
     }
 })

@@ -7,21 +7,48 @@
         .set-table{
             flex-direction: column;
             align-items: center;
-            gap: 30px;
+            gap: 50px;
         }
 
-        #options-btn{
-            display: flex;
-            align-items: flex-end;
-            gap: 30px;
-        }
 
-        #edit-btn{
-            background: rgb(255, 224, 47);
-        }
         #confirm-btn{
-            background: yellowgreen;
+            background: rgb(78, 205, 50);
         }
+
+        #cancel-btn{
+            background: red;
+            margin-top: 4px;
+        }
+
+        .sell-unit{
+            display: flex;
+            align-items: center;
+            background: black;
+            padding: 35px;
+            color: white;
+            font-size: 19px;
+            gap: 20px;
+        
+
+        }
+        .left, .right{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .right input{
+            width: 100%;
+            padding: 4px;
+            font-size: 19px;
+        }
+        .sell-unit button{
+            width: 8vw;
+            font-size: 18px;
+
+        }
+
+       
     </style>
 </head>
 <body>
@@ -54,23 +81,20 @@
             </tbody>
             
         </table>
-
-     <!--    <div id="options-btn">
-            EDIT button -> if client wants to do changes in new stock so render to back page(previous page) 
-            <button id="edit-btn" onclick="goback()">Edit</button>    
-
-
-            <form method="post" action="/addstock">
-                <input type="hidden" name="sell_stock" value='<%= JSON.stringify(sell_stock) %>'>
-                <button id="confirm-btn" type="submit">Confirm</button>
+        <div class="sell-unit">
+            <div class="left">
+                <h3>Enter Units: </h3> 
+                <button id="cancel-btn" onclick="goback()">Cancel</button>              
+            </div>
+        <!-- form to input no. of stock you want to sell -->
+            <form method="post" action="/sell_history/<%= sell_stock.id %>" class = "right">
+                <!-- for input we set its min and max value so no one can input -ve values as well as well the value which is greater than no. of units avilable in stock -->
+                    <input type="number" placeholder="0" name="sell_unit" min="0" max="<%= sell_stock.unit %>">
+                    <button id="confirm-btn">Confirm</button>
+                
             </form>
-        
-        </div>  -->
-        
-        <form method="post" action="/sell_history/<%= sell_stock.id %>">
-            <input type="number" placeholder="Enter no. of stocks" name="sell_unit">
-            <button>Confirm</button>
-        </form>
+        </div>
+    </div>
 
     </div>
 <body>

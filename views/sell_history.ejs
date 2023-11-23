@@ -13,21 +13,24 @@
             <tr>
                 <th>Product Code</th>
                 <th>Product name</th>
-                <th>Unit</th>
+                <th>Sell Unit</th>
                 <th>Price per unit</th>
-                <th>Stock Value</th>
+                <th>Amount</th>
+                <th>Date</th>
             </tr>
         </thead>
 
         <tbody>
             
-                <% for(list of list_data){    %>
+                <% for(list of sell_list){    %>
                     <tr>
                         <td><%= list.pcode %> </td>
                         <td><%= list.pname %> </td>
-                        <td><%= list.unit %> </td>
+                        <td><%= list.sell_unit %> </td>
                         <td><%= list.ppu %> </td>
-                        <td><%= list.stock_value %> </td>
+                        <td><%= list.amount %> </td>
+                        <td><%= list.date %> </td>
+
                     </tr>
                 <% } %>
             

@@ -48,9 +48,8 @@
                             <td><%= list.ppu %> </td>
                             <td><%= list.stock_value %> </td>
                             <td>
-                                <!-- 'Edit' and 'Delete' Button-->
+                                <!-- 'SELL' Button-->
                                 <form method="GET" action="/sell_page/<%= list.id %>/sell"><button class="edit-b">SELL</button></form>
-                                <!-- <form method="GET" action="/update/<%= list.id %>/delete"><button class="delete-b">Delete</button></form> -->
                             </td>
                         </tr>
                     <% } %>

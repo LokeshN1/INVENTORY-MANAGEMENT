@@ -57,14 +57,16 @@
     }
 </style>
 <body>
+    <!-- NAVBAR -->
     <nav>
         <h1>Inventory Management</h1>
         <span id="s_nav">
-            <h3>User</h3>
-            <h3>login</h3>
+            <h3 style="cursor: pointer;"> User</h3>
+            <h3 style="cursor: pointer;">login</h3>
         </span>
     </nav>
 
+    <!-- SIDE BAR -->
     <div class="side-bar">
         <form method="get" action="/home/show"><button>Visit Inventory</button></form>
 
@@ -72,7 +74,8 @@
 
         <form method="get" action="/home/newstock"><button>Add New Stock</button></form>
 
-        
+        <form method="get" action="/home/sellstock"><button>Sell Stock</button></form>
+
     </div>
 
 </body>

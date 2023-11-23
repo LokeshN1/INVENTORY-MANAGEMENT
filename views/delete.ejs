@@ -3,6 +3,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Delete Page</title>
+    <style>
+      .set-table{
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      #del-text{
+        font-size: 28px;
+        color: red;
+        font-weight: bold;
+        background: #000000e0;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        padding: 20px;
+      }
+
+      #del-code{
+        background: white;
+        padding: 4px;
+      }
+
+      input{
+        padding: 15px;
+        font-size: 23px;
+        border-style: none;
+        text-align: center;
+        border-radius: 4px;
+        
+      }
+      #confirm-btn{
+        align-self: center;
+        border-style: none;
+        outline: 0;
+        padding: 15px;margin: 0;
+        font-size: 23px;
+        background: green;
+        /* margin-top: px; */
+      }
+
+      #cancel-btn{
+        background: red;
+      }
+    </style>
   </head>
   <body>
     <!-- Applying that ejs template which will reamin common on all templates for example navbar, sidebar -->
@@ -30,8 +73,8 @@
           </tr>
         </tbody>
       </table>
-        <h3 style="font-weight: 100">
-        Are you sure to delete this stock? Write <b>'<%= del.pcode %>'</b> to
+        <h3 id="del-text" style="font-weight: 100">
+        Are you sure to delete this stock? Write <b id="del-code"><%= del.pcode %></b> to
         confirm!
         </h3>
         <form
@@ -39,10 +82,10 @@
         action="/delete/<%= encodeURIComponent(del.pcode) %>&<%= del.id %>?_method=DELETE"
         >
         <input type="text" name="txt_pcode" />
-        <button>Confirm</button>
+        <button id="confirm-btn">Confirm</button>
         </form>
         <!-- cancel button it will redirect to previous page -->
-        <button onclick="goback()">Cancel</button>
+        <button id="cancel-btn" onclick="goback()">Cancel</button>
     </div>
 
   </body>

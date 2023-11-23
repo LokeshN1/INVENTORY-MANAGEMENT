@@ -3,21 +3,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EDIT PAGE</title>
+
+    <style>
+        .edit-page{
+            display: flex;
+            align-items:center;
+            justify-content: space-between;
+            position:absolute;
+            top: 50%;
+            left: 40%;
+            background: #00000088;
+            color: white;
+            gap: 10px;
+            font-size: 23px;
+            padding: 20px;
+        }
+        input{
+            width: 90%;
+            height: 25%;
+            padding: 10px;
+            font-size: 20px;
+            margin: 4px;
+        }
+        .edit-1 h3{
+            width: 100%;
+            height: 25%;
+            padding: 10px;
+            text-align: center;
+
+        }
+        
+        .edit-page button{
+            margin-top: 10px;
+            position: relative;
+            left: 7%;
+            width: 80%;
+            font-size: 18px;     
+
+        }
+        .edit-1 button{
+            color: white;
+            background: rgb(160, 0, 0);
+        }
+        .edit-2 button{
+            background: green;
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
     <!-- Applying that ejs template which will reamin common on all templates for example navbar, sidebar -->
     <%- include("includes/common.ejs") %>
+<!-- <div class="edit-page"> -->
     <div class="set-table">
-        <h3>Product Code : <%= edit_product.pcode %></h3>
-        <h3>Product Name : <%= edit_product.pname %></h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td> <h3>Product Code :</h3> </td>
+                    <td> <h3> <%= edit_product.pcode %> </h3> </td>
+                </tr>
+                <tr>
+                    <td> <h3>Product Name :</h3></td>
+                    <td> <h3> <%= edit_product.pname %> </h3></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <div class="edit-page">
+        <!-- <h3>Product Code : <%= edit_product.pcode %></h3>
+        <h3>Product Name : <%= edit_product.pname %></h3> -->
 
         <!-- sending 'PATCH' request from here using 'method-override' package  -->
-        <form method="post" action="/edit/<%=edit_product.id%>/?_method=PATCH">
-            <h3>Unit: <input type="text" name="unit" placeholder="<%= edit_product.unit %>" value="<%= edit_product.unit %>"></h3>
-            <h3>Price Per Unit: <input type="text" name="ppu" placeholder="<%= edit_product.ppu %>" value="<%= edit_product.ppu %>"></h3>
-            <button>Apply Chanages</button>
-        </form>
+
+        <div class="edit-1">
+            <h3>Unit: </h3>
+            <h3>Price Per Unit: </h3>
             <button onclick="goback()">Cancel</button>
+        </div>
+
+        <div class="edit-2">
+            <form method="post" action="/edit/<%=edit_product.id%>/?_method=PATCH">
+                <h3><input type="text" name="unit" placeholder="<%= edit_product.unit %>" value="<%= edit_product.unit %>"></h3>
+                <h3><input type="text" name="ppu" placeholder="<%= edit_product.ppu %>" value="<%= edit_product.ppu %>"></h3>
+                <button>Apply Chanages</button>
+            </form>
+        </div>
     </div>
 </body>
 <script>

@@ -3,6 +3,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Stock</title>
+    <style>
+        .set-table{
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .set-table h1{
+            color: rgb(242, 255, 0);
+            background: black;
+            padding: 0 12px;
+        }
+        .set-table #add-btn{
+            position: absolute;
+            left: 40%;
+            background: rgb(255, 255, 0);
+
+        }
+        .info-box{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            background: rgba(0, 0, 0, 0.589);
+            padding: 40px;
+            color: rgb(255, 234, 0);
+        
+        }
+        .left{
+            display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+        }
+        .right{
+            display: flex;
+                flex-direction: column;
+                /* align-items: center; */
+            }
+        .right h3 input {
+            width: 120%;
+            font-size: 23px;
+            padding: 8px;
+        }
+        .right h3, .left h3{
+            width: 15vw;
+            height: 8vh;
+        }
+    </style>
 </head>
 <body>
     <!-- Applying that ejs template which will reamin common on all templates for example navbar, sidebar -->
@@ -12,13 +63,21 @@
 
         <h1>Fill Details of New Stock </h1>
         <form method="post" action="/newstockpreview">
-            
-            <h3>Product Code : <input type="text" name="pcode" ></h3>
-            <h3>Product Name : <input type="text" name="pname" ></h3>
-            <h3>Unit : <input type="text" name="unit" id=""></h3>
-            <h3>Price per unit : <input type="text" name="ppu" ></h3>
-
-            <button>Add</button>
+            <div class="info-box">
+                <div class="left">
+                    <h3>Product Code : </h3>
+                    <h3>Product Name : </h3>
+                    <h3>Unit : </h3>
+                    <h3>Price per unit : </h3>
+                </div>
+                <div class="right">
+                    <h3><input type="text" name="pcode" ></h3>
+                    <h3><input type="text" name="pname" ></h3>
+                    <h3><input type="text" name="unit" id=""></h3>
+                    <h3><input type="text" name="ppu" ></h3>
+                </div>
+            </div>
+            <button id="add-btn">Add</button>
         </form>
 
     </div>

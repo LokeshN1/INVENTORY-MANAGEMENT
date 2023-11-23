@@ -251,3 +251,86 @@ app.post("/addstock", (req, res) => {
 
     }
 })
+
+// Sell Stock-: In sidebar if user clicks on 'Sell Stock' request will sent here 
+app.get("/home/sellstock", (req, res) => {
+    let q = "SELECT * FROM list";
+    try {
+        connection.query(q, (err, list_data) => {
+            console.log(list_data);
+            res.render("sell_stock_page.ejs", {list_data}); // response will sent to this template where 'SELL' button is provided in front of each stock
+        })
+    } catch (err) {
+        console.log(err);
+        res.send("DATABASE Facing Error");
+    }
+})
+
+// Sell Stock interface -> when user will click on 'Sell' button request will sent here.
+app.get("/sell_page/:id/sell", (req, res) => {
+    let {id} = req.params;
+    console.log(id);
+    let q = `SELECT * FROM list
+             WHERE id = '${id}'`;
+
+    try {
+        connection.query(q, (err, result) => {
+            if(err) throw err;
+            console.log(result);
+            let sell_stock = result[0];
+            res.render("sell.ejs", {sell_stock});   // response will sent to this template where user can enter no. of units he want to sell.
+        })
+    } catch (err) {
+        console.log(err);
+        res.send("Unable to Proceed. DATABASE Facing Problems");
+    }
+})
+
+// after selecting no. of units, on clicking 'Confirm' button request will sent here.
+app.post("/sell_history/:id", (req, res) => {
+    let {id} = req.params;          // id of that stock which you want to sell
+    console.log("SELL PAGE");
+    console.log(req.body);
+    let {sell_unit}= req.body;      // no. of units you want to sell
+
+    sell_unit = parseInt(sell_unit);    // converting sell_unit from string to integer
+    console.log(sell_unit);
+
+// Obtaining data of that stock which's unit we want to sell-:
+    q = `SELECT * FROM list     
+         WHERE id = '${id}'`;
+    try {
+        connection.query(q, (err, stock) =>{
+            if(err) throw err;
+
+
+            let {unit: stk_unit,  ppu : stk_ppu} = stock[0];    // extracting no. of units and ppu from stock
+            
+            console.log(stk_unit);      // no. of units
+            console.log(stk_ppu);       // price per unit
+
+            let new_unit = stk_unit - sell_unit;      // after selling no. of units avilable 
+            let new_stk_val = new_unit * stk_ppu;       // new stock value
+
+
+    // NOW Updating the stock's data after selling-:
+            q1 = `UPDATE list 
+            SET unit = '${new_unit}', stock_value = '${new_stk_val}'
+            WHERE id = '${id}'`
+            try {
+                connection.query(q1, (err, result) => {
+                    if(err) throw err;
+                    console.log(result);
+                    res.redirect("/home/show");     // redirecting to visit inventory page
+                })
+            } catch (err) {
+                console.log(err);
+                res.send("Unable to sell Stock. DATABASE FACING PROBLEMS...");
+            }
+
+        })
+    } catch (err) {
+        console.log(err);
+        res.send("Unable to sell Stock. DATABASE FACING PROBLEMS...")
+    }
+})

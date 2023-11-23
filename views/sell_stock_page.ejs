@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Inventory</title>
+    <title>Sell Stock Page</title>
     <style>
         .edit-b, .delete-b{
             font-size: 20px;
@@ -34,7 +34,7 @@
                     <th>Unit</th>
                     <th>Price per unit</th>
                     <th>Stock Value</th>
-                    <th>UPDATE</th>
+                    <th>SELL</th>
                 </tr>
             </thead>
 
@@ -49,8 +49,8 @@
                             <td><%= list.stock_value %> </td>
                             <td>
                                 <!-- 'Edit' and 'Delete' Button-->
-                                <form method="GET" action="/update/<%= list.id %>/edit"><button class="edit-b">Edit</button></form>
-                                <form method="GET" action="/update/<%= list.id %>/delete"><button class="delete-b">Delete</button></form>
+                                <form method="GET" action="/sell_page/<%= list.id %>/sell"><button class="edit-b">SELL</button></form>
+                                <!-- <form method="GET" action="/update/<%= list.id %>/delete"><button class="delete-b">Delete</button></form> -->
                             </td>
                         </tr>
                     <% } %>

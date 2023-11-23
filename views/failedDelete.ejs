@@ -3,16 +3,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Message</title>
+
+    <style>
+        .set-table{
+            flex-direction: column;
+            align-items: center;
+            background: rgba(11, 11, 11, 0.764);
+            padding: 30px;
+            padding-right: 0px;
+            color: white;
+            gap: 40px;
+        }
+        #ic-span{
+            color: black;
+            background: rgba(255, 0, 0, 0.752);
+            padding: 0 6px;
+            
+        }
+        #pc-span{
+            color: red;
+            background: white;
+        }
+        .option-btn button{
+            width: 40%;
+        }
+        .option-btn{
+            width: 40%;
+            display: flex;
+            gap: 20px;
+        }
+
+        #retry-btn{
+            background: rgb(46, 46, 46);
+            color: white;
+        }
+        #home-btn{
+
+        }
+    </style>
 </head>
 <body>
     <!-- Applying that ejs template which will reamin common on all templates for example navbar, sidebar -->
     <%- include("includes/common.ejs") %>
     
     <div class="set-table">
-        <h1>Invalid Code. Failed To delete stock product code: <%= code %>.</h1>
+        <h1> <span id="ic-span">Invalid Code.</span> <br> Failed To delete stock product code: <span id="pc-span"><%= code %> </span> .</h1>
         <!-- Request sending to update page  -->
-        <button onclick="goback()">Retry</button> 
-        <button onclick="gohome()">Home page</button>
+        <div class="options-btn">
+            <button id="retry-btn" onclick="goback()">Retry</button> 
+            <button id="home-btn" onclick="gohome()">Home page</button>
+        </div>
     </div>
 
 </body>

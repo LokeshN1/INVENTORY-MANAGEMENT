@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preview</title>
+    <title>Sell</title>
     <style>
         .set-table{
             flex-direction: column;
@@ -44,29 +44,33 @@
             <tbody>
                 
                         <tr>
-                            <td><%= new_det.pcode %> </td>
-                            <td><%= new_det.pname %> </td>
-                            <td><%= new_det.unit %> </td>
-                            <td><%= new_det.ppu %> </td>
-                            <td><%= new_det.unit*new_det.ppu %> </td>
+                            <td><%= sell_stock.pcode %> </td>
+                            <td><%= sell_stock.pname %> </td>
+                            <td><%= sell_stock.unit %> </td>
+                            <td><%= sell_stock.ppu %> </td>
+                            <td><%= sell_stock.unit*sell_stock.ppu %> </td>
                         </tr>
                 
             </tbody>
             
         </table>
 
-        <div id="options-btn">
-            <!-- EDIT button -> if client wants to do changes in new stock so render to back page(previous page) -->
+     <!--    <div id="options-btn">
+            EDIT button -> if client wants to do changes in new stock so render to back page(previous page) 
             <button id="edit-btn" onclick="goback()">Edit</button>    
 
 
-            <!-- Confirm button -> storing new stock in database -->
             <form method="post" action="/addstock">
-                <!-- we sent 'post' request also an object 'new_det' in form of string with the help of JSON.stringify()  -->
-                <input type="hidden" name="new_det" value='<%= JSON.stringify(new_det) %>'>
+                <input type="hidden" name="sell_stock" value='<%= JSON.stringify(sell_stock) %>'>
                 <button id="confirm-btn" type="submit">Confirm</button>
             </form>
-        </div>
+        
+        </div>  -->
+        
+        <form method="post" action="/sell_history/<%= sell_stock.id %>">
+            <input type="number" placeholder="Enter no. of stocks" name="sell_unit">
+            <button>Confirm</button>
+        </form>
 
     </div>
 <body>

@@ -70,19 +70,35 @@ app.get("/home/show", (req, res) =>{
 })
 
 
+
 // Update Page-: here 'edit' and 'delete' button will be provided along with inventory data
 app.get("/home/update", (req, res) =>{
-    let q = `SELECT * FROM list`;
-    try {
-        connection.query(q, (err, list_data) =>{
-            console.log(list_data);
 
-            res.render("update.ejs", {list_data});      // redering to update page
+    if(check == 0){         //NOTE:- before making changes in invenotry checking is admin verified or not 
+        res.render("verify_admin.ejs");
+    }
+
+    try {
+        connection.query(q, (err, result) => {
+            if(err) throw err;
+            console.log(result);
+            let q = "SELECT * FROM list"
+                try {
+                    connection.query(q, (err, list_data) =>{
+                        console.log(list_data);
+                        
+                        res.render("update.ejs", {list_data});      // redering to update page
+                    })
+                } catch (err) {
+                    console.log(err);
+                    res.send("Database facing Error. Try Again...");
+                }
         })
     } catch (err) {
         console.log(err);
         res.send("Database facing Error. Try Again...");
     }
+   
 })
 
 
@@ -203,9 +219,13 @@ app.delete("/delete/:code&:id", (req, res)=>{
 
 // ADD NEW STOCK-: if user click on 'add new stock' button so request will sent here and page will render to newstockform template
 app.get("/home/newstock", (req, res) => {
+
+    if(check == 0){         //NOTE:- before making changes in invenotry checking is admin verified or not 
+        res.render("verify_admin.ejs");
+    }
+
     res.render("newstockform.ejs");
 })
-
 
 // Preview-: after filling details of new stock when user click on 'add' button in newstockform template request will sent here and page will render to newstockpreview template
 app.post("/newstockpreview", (req, res) =>{
@@ -254,6 +274,11 @@ app.post("/addstock", (req, res) => {
 
 // Sell Stock-: In sidebar if user clicks on 'Sell Stock' request will sent here 
 app.get("/home/sellstock", (req, res) => {
+
+    if(check == 0){         //NOTE:- before making changes in invenotry checking is admin verified or not 
+        res.render("verify_admin.ejs");
+    }
+
     let q = "SELECT * FROM list";
     try {
         connection.query(q, (err, list_data) => {
@@ -355,7 +380,7 @@ app.post("/sell_history/:id", (req, res) => {
         // storing details related to sell stock like porduct name, no. of stock sell, amount, date etc. in array arr
             let arr = [ uuidv4(), pcode, pname, sell_unit, ppu, amount, date ];
     
-        // Adding sell history in Database-:    
+        // Adding sell history in Databasez-:    
             try {
             // inserting details into new row
                 let q2 = `INSERT INTO sell_history
@@ -381,6 +406,11 @@ app.post("/sell_history/:id", (req, res) => {
 
 // 'SELL HISTORY' Button-> In sidebar if user clicks on 'SELL HISTORY' button request will sent here 
 app.get("/home/sell_history", (req, res) =>{
+
+    if(check == 0){         //NOTE:- before making changes in invenotry checking is admin verified or not 
+        res.render("verify_admin.ejs");
+    }
+
     let q = "SELECT * FROM sell_history";
     try {
         connection.query(q, (err, sell_list) => {
@@ -394,4 +424,54 @@ app.get("/home/sell_history", (req, res) =>{
         res.send("Unable to Show Sell History. DATABASE FACING PROBLEMS...")
 
     }
+})
+
+
+app.get("/home/verify", (req, res) => {
+    res.render("verify_admin.ejs");
+})
+
+
+
+// NOW CERATING SIGN UP PAGE -> MEANS VERIFYING ADMIN-:
+let check = 0;  // if it is 0 it means you are not logged in{admin not verfied}
+
+
+
+//'ADMIN VERIFICATION PAGE' OR 'SIGN IN PAGE' -: this request will verify the admin if admin verified successfully so make check = 1 otherwise check remains same means 0
+// request from verify_admin.ejs template will sent here
+// In verify_admin.ejs template user will fill its username / email and password which will verify on this request 
+app.post("/home/verify",(req, res) => {
+    let {name, pword} = req.body;       // details filled by user
+    let filled_details = req.body;
+    console.log(name);          
+    console.log(pword);
+// Extracting username and password of admin from database to check is they matches with details filled by user or not
+    let q = `SELECT * FROM admin`;
+    try {
+        connection.query(q, (err, result) => {
+            if(err) throw err;
+            console.log(result);
+            let {username: username, email: email, password: password} = result[0];
+            console.log(username);
+            console.log(password);
+            console.log(email);
+
+        // if information which is required for verfication username/email and password matches.
+            if(name == username || name == email && pword == password ){
+                check = 1;                  // admin verified
+                res.redirect("/home");      // redirect to home page
+
+            }
+        // otherwise-: admin not verified
+            else{
+                console.log(req.body);     
+                res.render("not_verified.ejs",filled_details) // if admin not verified render to not_verified.ejs template where it will gave message admin not verified
+            }
+        })
+    } catch (err) {
+        console.log(err);
+        res.send("DATABASE FACING ERROR TRY AGAIN...");
+    }
+    
 })

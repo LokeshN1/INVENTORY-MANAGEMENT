@@ -1,0 +1,94 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Verify</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .msg{
+            width: 30vw;
+            height: 40vh;
+            background: rgba(255, 255, 255, 0.807);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: column;
+            padding: 20px 10px;
+            gap: 50px;
+        }
+        .heading{
+            width: 100%;
+            border-bottom: 2px solid black;
+            text-align: center;
+        }
+        .heading h1{
+            padding-bottom: 14px;
+        }
+        .msg-content{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 19px;
+            border: 1px solid black;
+            padding: 10px;
+            font-size: 18px;
+        }
+        #left, #right{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+        button{
+            border-style: none;
+            outline: none;
+            background: rgb(15, 82, 0);
+            padding: 10px 30px;
+            border-radius: 3px;
+            font-size: 17px;
+            color: white;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="msg">
+        <div class="heading">
+            <h1>Inventory Management</h1>
+        </div>
+        <div class="msg-content">
+            <div id="left">
+                <h3>Message - </h3>
+                <h3>Result - </h3>
+            </div>
+            <div id="right">
+                <h3 style="color: rgb(0, 51, 255);">Wrong Username or Password</h3>
+                <h3 style="color: red;">Verfication Failed </h3>      
+            </div>
+
+        </div>
+        <div class="btn">
+          <form method="get" action="/home/verify"><button>Retry</button></form>
+          <form method="get" action="/home"><button style="background: rgb(219, 146, 0);">Home</button></form>
+        </div>
+    </div>
+</body>
+</html>

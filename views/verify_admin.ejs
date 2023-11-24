@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Admin</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: black;
+        }
+
+        .verify-box{
+            width: 30vw;
+            height: 70vh;
+            background: #ffffffea;
+            display: flex;
+            align-items: center;
+            justify-content:flex-start;
+            flex-direction: column;
+            padding: 20px 10px;
+            gap: 50px;
+            border-radius: 3px;
+            
+        }
+        .verify-box h3{
+            font-size: 24px;
+        }
+        .heading{
+            width: 100%;
+            border-bottom: 2px solid black;
+            text-align: center;
+        }
+        .heading h1{
+            padding-bottom: 14px;
+        }
+        .form-cls{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .form-cls input{
+            width: 80%;
+            padding: 15px 10px;
+            border-radius: 3px;
+            font-size: 19px;
+            color: rgb(37, 37, 37);
+            
+            
+        }
+        button, input{
+            border-style: none;
+            outline: none;
+            border: 1px solid black;
+        }
+        .form-cls button, button{
+            width: 80%;
+            padding: 10px;
+            font-size: 19px;
+            background: rgb(0, 123, 0);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        #cancel-btn{
+            background: rgb(222, 0, 0);
+            margin-top: -19px;
+        }
+    </style>
+</head>
+<body>
+    <div class="verify-box">
+        <div class="heading">
+            <h1>Inventory Management</h1>
+        </div>
+        <h3>Please Verify To Continue</h3>
+        <form method="post" action="/home/verify" class="form-cls">
+            <input type="text" placeholder="Username or email" name="name">
+            <input type="password" name="pword" id="" placeholder="Password">
+            <button>Verify</button>
+        </form>
+        <form method="get" action="/home" class="form-cls"><button id="cancel-btn" onclick="goback()">Cancel</button></form>
+    </div>
+</body>
+<script>
+   
+</script>
+</html>

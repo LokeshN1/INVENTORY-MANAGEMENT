@@ -434,8 +434,13 @@ app.get("/home/verify", (req, res) => {
 
 
 // NOW CERATING SIGN UP PAGE -> MEANS VERIFYING ADMIN-:
-let check = 0;  // if it is 0 it means you are not logged in{admin not verfied}
+/*
+'check' is a global varible. which indicates verification of admin means it checks is admin verified or not.
+if check = 0 it means admin is not verified.
+if check = 1 it means admin is verified.
+*/
 
+let check = 0;  
 
 
 //'ADMIN VERIFICATION PAGE' OR 'SIGN IN PAGE' -: this request will verify the admin if admin verified successfully so make check = 1 otherwise check remains same means 0
@@ -458,7 +463,7 @@ app.post("/home/verify",(req, res) => {
             console.log(email);
 
         // if information which is required for verfication username/email and password matches.
-            if(name == username || name == email && pword == password ){
+            if(name === username && pword === password || name === email && pword === password  ){
                 check = 1;                  // admin verified
                 res.redirect("/home");      // redirect to home page
 
@@ -475,3 +480,33 @@ app.post("/home/verify",(req, res) => {
     }
     
 })
+
+
+// Admin Profile -: in this request you will either render admin profile or verification page
+app.get("/home/admin", (req, res) => {
+
+    if(check == 0){     // if admin not verifed so render to verify_admin.ejs template
+        res.render("verify_admin.ejs");
+    }
+
+// If admin is verified so display admin's profile-:
+    // Extracting details of admin from database
+    try {
+        let q = "SELECT * FROM admin";
+        connection.query(q, (err, result) => {
+            if(err) throw err;
+            let admin = result[0];
+            res.render("admin_page.ejs",{admin});   // render to admin profile page
+        })
+    } catch (err) {
+        console.log(err);
+        res.send("DATABASE FACING ERROR TRY AGAIN...");
+    }
+})
+
+
+// Signout Button-: If admin wants to signout so in this request we will make check = 0 which means admin unverified.
+    app.get("/home/signout",(req, res) => {
+        check = 0;
+        res.redirect("/home");  // after making check = 0 redirect to home page
+    })

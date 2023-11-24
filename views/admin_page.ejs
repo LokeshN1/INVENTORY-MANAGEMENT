@@ -1,0 +1,120 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: black;
+
+        }
+        .profile-box{
+            width: 30vw;
+            height: 70vh;
+            background-image: linear-gradient(45deg, black, rgb(255, 54, 54), black);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: column;
+            padding: 20px 30px;
+            gap: 40px;
+        }
+        .heading{
+            width: 100%;
+            border-bottom: 2px solid black;
+            text-align: center;
+        }
+        .heading h1{
+            padding-bottom: 14px;
+        }
+
+        .profile-content{
+            width: 100%;
+        }
+        table{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            border: 1px solid black;
+            align-items: flex-start;
+            padding: 20px 10px;
+            gap: 24px;
+            margin-top: 4vh;
+            background: rgba(255, 255, 255, 0.972);            
+        }
+        .profile-content h3{
+            font-size: 25px;
+        }
+
+        th, td{
+            padding: 20px 54px;
+            font-size: 20px;
+        }
+
+        .btn{
+            display: flex;
+            align-items: center;
+            gap: 70px;
+        }
+        button{
+            border-style: none;
+            outline: none;
+        }
+        #home-b, #signout-b{
+            font-size: 20px;
+            width: 8vw;
+            padding: 8px 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #signout-b{
+            background: rgb(190, 0, 0);
+            color: white;
+            border: 1px solid red;
+        }
+        #home-b{
+            background: rgb(0, 196, 36);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile-box">
+        <div class="heading">
+            <h1>Inventory Management</h1>
+        </div>
+        <div class="profile-content">
+            <h3>Profile Details</h3>
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <td><%= admin.name %></td>
+                    </tr>
+                    <tr>
+                        <th>Username</th>
+                        <td><%= admin.username %></td>
+
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td><%= admin.email %></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="btn">
+            <form method="get" action="/home/signout"><button id="signout-b">Sign Out</button></form>
+            <form method="get" action="/home"><button id="home-b">Home</button></form>
+        </div>
+    </div>
+</body>
+</html>

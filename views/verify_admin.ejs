@@ -85,8 +85,8 @@
         </div>
         <h3>Please Verify To Continue</h3>
         <form method="post" action="/home/verify" class="form-cls">
-            <input type="text" placeholder="Username or email" name="name">
-            <input type="password" name="pword" id="" placeholder="Password">
+            <input type="text" placeholder="Username or email" name="name" >
+            <input type="password" name="pword" id="" placeholder="Password" minlength="1">
             <button>Verify</button>
         </form>
         <form method="get" action="/home" class="form-cls"><button id="cancel-btn" onclick="goback()">Cancel</button></form>

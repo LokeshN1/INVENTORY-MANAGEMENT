@@ -57,7 +57,10 @@ app.get("/home",(req, res)=>{
 
 // SHOW INVENTORY DATA-: 
 app.get("/home/show", (req, res) =>{
-    let q = `SELECT * FROM list`;
+
+// Showing stock list -: newest(latest) inserted stock will be show at the top of the list.
+    let q = `SELECT * FROM list
+             ORDER BY date_modified DESC`;
     try {
         connection.query(q, (err, list_data) =>{
             console.log(list_data);
@@ -82,7 +85,8 @@ app.get("/home/update", (req, res) =>{
         connection.query(q, (err, result) => {
             if(err) throw err;
             console.log(result);
-            let q = "SELECT * FROM list"
+            let q = `SELECT * FROM list
+                     ORDER BY date_modified DESC`
                 try {
                     connection.query(q, (err, list_data) =>{
                         console.log(list_data);
@@ -329,7 +333,7 @@ app.post("/sell_history/:id", (req, res) => {
             if(err) throw err;
 
 
-            let {unit: stk_unit,  ppu : stk_ppu} = stock[0];    // extracting no. of units and ppu from stock
+            let {unit: stk_unit,  ppu : stk_ppu, date_modified : date} = stock[0];    // extracting no. of units and ppu from stock
             
             console.log(stk_unit);      // no. of units
             console.log(stk_ppu);       // price per unit
@@ -363,19 +367,6 @@ app.post("/sell_history/:id", (req, res) => {
 
             let amount = sell_unit*ppu;         // total price of sell_unit
             
-
-        // Tracking time when you sell stock-:
-            let d = new Date;
-            let dd = d.getDate();
-            let mm = d.toLocaleString('default', { month: 'long' });    // to get month name
-            let yy = d.getFullYear();
-            let h = d.getHours();
-            h = (h < 10) ? `0${h}` : h;
-            let m = d.getMinutes(); 
-            m = (m < 10) ? `0${m}` : m;
-            
-            let date = `${mm} ${dd}, ${yy} ${h}:${m}`;
-            console.log(date);
     
         // storing details related to sell stock like porduct name, no. of stock sell, amount, date etc. in array arr
             let arr = [ uuidv4(), pcode, pname, sell_unit, ppu, amount, date ];
@@ -384,7 +375,7 @@ app.post("/sell_history/:id", (req, res) => {
             try {
             // inserting details into new row
                 let q2 = `INSERT INTO sell_history
-                          (id, pcode, pname, sell_unit, ppu, amount, date )
+                          (id, pcode, pname, sell_unit, ppu, amount, date_modified )
                           VALUES (?, ?, ?, ?, ?, ?, ?)`
                           
                 connection.query(q2, arr, (err, result) => {
@@ -411,7 +402,9 @@ app.get("/home/sell_history", (req, res) =>{
         res.render("verify_admin.ejs");
     }
 
-    let q = "SELECT * FROM sell_history";
+// Showing Sell History -: In list new(latest) sold stock will be show at the top of the list.
+    let q = `SELECT * FROM sell_history
+             ORDER BY date_modified DESC`;
     try {
         connection.query(q, (err, sell_list) => {
 
